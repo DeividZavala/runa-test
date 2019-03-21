@@ -2,6 +2,7 @@
 export const SET_STATUS = 'runa-test/beers/SET_STATUS';
 export const FETCH_DATA = 'runa-test/beers/FETCH_DATA';
 export const FETCH_SUCCESS = 'runa-test/beers/FETCH_SUCCESS';
+export const SEARCH = 'runa-test/beers/SEARCH';
 
 // INITIAL STATE
 const initialState = {
@@ -43,6 +44,13 @@ export function setStatus(status){
 	return {
 		type: SET_STATUS,
 		payload: status
+	}
+}
+
+export function searchBeer(input){
+	return {
+		type: SEARCH,
+		payload: input
 	}
 }
 

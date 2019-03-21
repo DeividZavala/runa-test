@@ -1,13 +1,13 @@
 import {createStore, combineReducers, applyMiddleware, compose} from "redux";
 import {combineEpics, createEpicMiddleware} from "redux-observable";
-import {fetchBeersEpics} from '../epics/beersService';
+import {fetchBeersEpics, SearchBeersEpics} from '../epics/beersService';
 import posts from './ducks/posts';
 import beers from './ducks/beers';
 
 
 export default function configureStore(){
 
-    const rootEpic = combineEpics(fetchBeersEpics);
+    const rootEpic = combineEpics(fetchBeersEpics, SearchBeersEpics);
 
     const epicMiddleware = createEpicMiddleware();
     const rootReducer = combineReducers({

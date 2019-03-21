@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {fetchBeers} from '../../redux/ducks/beers';
 import Beer from "../components/beer";
 
 class BearsContainer extends Component{
-
-	componentWillMount() {
-		this.props.fetchBeers()
-	}
 
 	render(){
 		const {data:beers, status} = this.props.beers;
@@ -31,4 +26,4 @@ class BearsContainer extends Component{
 }
 
 const mapStateToProps = (state) => state;
-export default connect(mapStateToProps, {fetchBeers})(BearsContainer);
+export default connect(mapStateToProps)(BearsContainer);
