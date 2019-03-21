@@ -1,6 +1,6 @@
 import {ajax} from "rxjs/ajax";
-import {debounceTime, map, switchMap} from 'rxjs/operators';
-import {fetchBeersSuccess, setStatus, FETCH_DATA, SEARCH} from '../redux/ducks/beers';
+import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
+import {fetchBeersSuccess, setStatus, FETCH_DATA, SEARCH, fetchBeersFailed} from '../redux/ducks/beers';
 import {of, concat} from "rxjs";
 import {ofType} from "redux-observable";
 
@@ -30,7 +30,10 @@ export function SearchBeersEpics(action$){
 				of(setStatus("pending")),
 				ajax.getJSON(`${base_url}/beers?beer_name=${encodeURIComponent(payload)}`)
 					.pipe(
-						map(res => fetchBeersSuccess(res))
+						map(res => fetchBeersSuccess(res)),
+						catchError(err => {
+							return of(fetchBeersFailed(err.response.message))
+						})
 					)
 			)
 		})

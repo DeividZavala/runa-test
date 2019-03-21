@@ -12,7 +12,7 @@ class App extends Component {
 
 	handleChange = e => {
 		let input = e.target.value;
-		if(input === "") return this.props.fetchBeers();
+		//if(input === "") return this.props.fetchBeers();
 		this.props.searchBeer(input)
 	};
 
