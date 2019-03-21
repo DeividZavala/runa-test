@@ -1,6 +1,6 @@
 // ACTION TYPES
-export const SET_STATUS = 'runa-test/beers/FETCH_SUCCESS';
-export const FETCH_DATA = 'runa-test/beers/FETCH_SUCCESS';
+export const SET_STATUS = 'runa-test/beers/SET_STATUS';
+export const FETCH_DATA = 'runa-test/beers/FETCH_DATA';
 export const FETCH_SUCCESS = 'runa-test/beers/FETCH_SUCCESS';
 
 // INITIAL STATE
@@ -11,6 +11,7 @@ const initialState = {
 
 // REDUCER
 export default function reducer(state = initialState, action) {
+	console.log(action)
 	switch (action.type) {
 
 		case SET_STATUS:
@@ -40,7 +41,7 @@ export function fetchBeers(){
 
 export function setStatus(status){
 	return {
-		type: FETCH_SUCCESS,
+		type: SET_STATUS,
 		payload: status
 	}
 }

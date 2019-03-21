@@ -6,7 +6,7 @@ import Beer from "../components/beer";
 class BearsContainer extends Component{
 
 	componentWillMount() {
-		//this.props.fetchBeers()
+		this.props.fetchBeers()
 	}
 
 	render(){
