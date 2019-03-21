@@ -1,10 +1,10 @@
 import {ajax} from "rxjs/ajax";
 import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
-import {fetchBeersSuccess, setStatus, FETCH_DATA, SEARCH, fetchBeersFailed} from '../redux/ducks/beers';
+import {fetchBeersSuccess, setStatus, FETCH_DATA, SEARCH, fetchBeersFailed, FETCH_BEER} from '../redux/ducks/beers';
 import {of, concat} from "rxjs";
 import {ofType} from "redux-observable";
 
-const base_url = "https://api.punkapi.com/v2/";
+const base_url = "https://api.punkapi.com/v2";
 
 export function fetchBeersEpics(action$){
 	return action$.pipe(
@@ -13,6 +13,21 @@ export function fetchBeersEpics(action$){
 			return concat(
 				of(setStatus("pending")),
 				ajax.getJSON(`${base_url}/beers?per_page=52`)
+					.pipe(
+						map(res => fetchBeersSuccess(res))
+					)
+			)
+		})
+	)
+}
+
+export function fetchBeerByIdEpics(action$){
+	return action$.pipe(
+		ofType(FETCH_BEER),
+		switchMap(({payload}) => {
+			return concat(
+				of(setStatus("pending")),
+				ajax.getJSON(`${base_url}/beers/${payload}`)
 					.pipe(
 						map(res => fetchBeersSuccess(res))
 					)

@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-const Beer = ({image_url, name, description}) => (
+const Beer = ({image_url, name, description, id}) => (
 	<div>
 		<div className="uk-card uk-card-default">
 			<div className="uk-card-media-top">
@@ -9,6 +10,9 @@ const Beer = ({image_url, name, description}) => (
 			<div className="uk-card-body">
 				<h3 className="uk-card-title">{name}</h3>
 				<p className="uk-text-truncate">{description}</p>
+			</div>
+			<div className="uk-card-footer">
+				<Link to={`/${id}`} className="uk-button uk-button-primary">Más información</Link>
 			</div>
 		</div>
 	</div>

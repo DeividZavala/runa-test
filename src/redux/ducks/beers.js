@@ -1,6 +1,7 @@
 // ACTION TYPES
 export const SET_STATUS = 'runa-test/beers/SET_STATUS';
 export const FETCH_DATA = 'runa-test/beers/FETCH_DATA';
+export const FETCH_BEER = 'runa-test/beers/FETCH_BEER';
 export const FETCH_SUCCESS = 'runa-test/beers/FETCH_SUCCESS';
 export const FETCH_FAILED = 'runa-test/beers/FETCH_FAILED';
 export const SEARCH = 'runa-test/beers/SEARCH';
@@ -49,6 +50,13 @@ export default function reducer(state = initialState, action) {
 export function fetchBeers(){
 	return {
 		type: FETCH_DATA
+	}
+}
+
+export function fetchBeer(id){
+	return {
+		type: FETCH_BEER,
+		payload: id
 	}
 }
 

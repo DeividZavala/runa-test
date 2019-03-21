@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import Router from './Router';
 import {fetchBeers, searchBeer} from './redux/ducks/beers';
-import './App.css';
 import {connect} from "react-redux";
+import {Link, withRouter} from "react-router-dom";
+import './App.css';
 
 class App extends Component {
 
-	componentWillMount() {
-		this.props.fetchBeers()
-	}
-
 	handleChange = e => {
 		let input = e.target.value;
-		//if(input === "") return this.props.fetchBeers();
+		if(input === "") return this.props.fetchBeers();
 		this.props.searchBeer(input)
+	};
+
+	randomBeer = (e) => {
+		e.preventDefault();
+		let random = Math.floor(Math.random() * 325) + 1;
+		this.props.history.push(`/${random}`)
 	};
 
   render() {
@@ -24,8 +27,8 @@ class App extends Component {
 					<div className="uk-navbar-left">
 
 						<ul className="uk-navbar-nav">
-							<li className="uk-active"><a href="#">Active</a></li>
-							<li><a href="#">Item</a></li>
+							<li className="uk-active"><Link to="/">Home</Link></li>
+							<li onClick={this.randomBeer}><a href="">Cerveza Random</a></li>
 						</ul>
 
 					</div>
@@ -55,6 +58,8 @@ class App extends Component {
   }
 }
 
+const WithRouter = withRouter(App);
+
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, {fetchBeers, searchBeer})(App);
+export default connect(mapStateToProps, {fetchBeers, searchBeer})(WithRouter);

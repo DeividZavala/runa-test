@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {fetchBeers} from '../../redux/ducks/beers';
 import Beer from "../components/beer";
 
 class BearsContainer extends Component{
+
+	componentWillMount() {
+		this.props.fetchBeers()
+	}
 
 	render(){
 		const {data:beers, status, messages} = this.props.beers;
@@ -16,7 +21,7 @@ class BearsContainer extends Component{
 						</div>
 					}
 					{status === "success" &&
-					<div className="uk-grid-small uk-grid-match uk-child-width-1-4@m" uk-grid="true">
+					<div className="uk-grid-small uk-grid-match uk-child-width-1-4@m uk-child-width-1-1@s" uk-grid="true">
 						{beers.map((beer, index) => <Beer {...beer} key={index}/>)}
 					</div>}
 
@@ -39,4 +44,4 @@ class BearsContainer extends Component{
 }
 
 const mapStateToProps = (state) => state;
-export default connect(mapStateToProps)(BearsContainer);
+export default connect(mapStateToProps, {fetchBeers})(BearsContainer);
