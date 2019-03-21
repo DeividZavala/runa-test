@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Router from './Router';
-import {fetchBeers, searchBeer} from './redux/ducks/beers';
+import {fetchBeers, searchBeer, fetchBeer} from './redux/ducks/beers';
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import './App.css';
@@ -16,6 +16,7 @@ class App extends Component {
 	randomBeer = (e) => {
 		e.preventDefault();
 		let random = Math.floor(Math.random() * 325) + 1;
+		this.props.fetchBeer(random);
 		this.props.history.push(`/${random}`)
 	};
 
@@ -62,4 +63,4 @@ const WithRouter = withRouter(App);
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, {fetchBeers, searchBeer})(WithRouter);
+export default connect(mapStateToProps, {fetchBeers, searchBeer, fetchBeer})(WithRouter);
