@@ -7,6 +7,13 @@ import {Provider} from 'react-redux';
 import createStore from './redux/configureStore';
 import {BrowserRouter} from "react-router-dom";
 
+// UIkit
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+import 'uikit/dist/css/uikit.min.css';
+
+UIkit.use(Icons);
+
 const store = createStore();
 const WithRouter = () => <BrowserRouter><App/></BrowserRouter>;
 const WithProvider = () => <Provider store={store}><WithRouter /></Provider>;
