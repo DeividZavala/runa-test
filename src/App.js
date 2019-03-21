@@ -24,10 +24,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-    posts: state.posts
-  }
-}
+const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps)(App);
